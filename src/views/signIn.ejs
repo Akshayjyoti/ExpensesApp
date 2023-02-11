@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Expenses</title>
+ <meta charset="utf-8">
+ <meta http-equiv="X-UA-Compatible" content="IE=edge">
+ <meta name="viewport" content="width=device-width, initial-scale=1">
+ <link href="../css/bootstrap.min.css" rel="stylesheet">
+ <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css"/>
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+ <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+ <link href="../css/style-home.css" rel="stylesheet">
+</head>
+
+<body>
+<div id="wrapper">
+
+	<header>
+	    <div class="container">
+		    <div class="logo col-md-5 col-sm-5 col-xs-8">
+            <span class="text"><h3>EXPENSES CHART</h3></span>
+			</div>
+			<div class="mobile-togle col-md-12 col-sm-12 col-xs-12">
+        <nav class="navbar navbar-default" role="navigation">
+  <div class="navbar-header">
+  <button type="button" id="hamburger" class="navbar-toggle x collapsed" data-toggle="collapse" data-target="#navbar-collapse-x">
+  <span class="icon-bar"></span>
+  <span class="icon-bar"></span>
+  <span class="icon-bar"></span>
+  </button>
+  <a class="navbar-brand" href="#top"></a>
+  </div>
+
+  <div class="collapse navbar-collapse" id="navbar-collapse-x">
+  <ul class="nav navbar-nav navbar-right">
+  </div><!-- .navbar-collapse -->
+  </nav>
+  			</div>
+
+  			<div class="right_section col-md-5 col-xs-12">
+  			<div>
+  			      <br><br><br>
+  				</div>
+
+     </div>
+
+     <div class="sign-in col-md-2">
+     <span class="dvider">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item">
+              <a class="nav-link" href="..">Home</a>
+            </li>
+            </li>
+    
+          </ul>
+     </span>
+
+     </div>
+
+  		</div>
+  	</header>
+
+
+<section class="banner">
+    <img src="../images/hero image.png"/>
+	<div class="inner-content col-md-12">
+	<div class="container jumboContainer">
+	<div class=" col-md-8 middle">
+	   <h1>SIGN IN <br><br>
+        TO CONTINUE<br></h1>
+    </div>
+
+	   <div class="content-right col-md-4">
+	   <h3>SIGN IN</h3>
+	   <div class="text-center">
+        <form name="signup" action="/auth/signIn" method="post">
+            Username: <input name="username" id="username" style="color: black;"/><br><br>
+            Password: <input name="password" type="password" id="password" style="color: black;"/><br><br>
+            <input type="submit" class="btn btn-primary btn-lg"></input>
+        </form>
+        
+      </div>
+      </form>
+
+	   </div>
+	</div>
+	   </div>
+</section>
+
+
+
+</div><!---------- End of Wrapper ----------->
+
+
+
+  <script src="js/jquery.min.js"></script>
+  <script src="js/bootstrap.min.js"></script>
+  <script>
+jQuery(document).ready(function(){
+
+ // alert("wow");
+  //  jQuery("header").addClass("fixed");
+  jQuery("#hamburger").click(function(){
+		//alert("The paragraph was clicked.");
+		jQuery("header").toggleClass("fixed");
+	});
+
+
+});
+
+</script>
+
+</body>
+</html>
