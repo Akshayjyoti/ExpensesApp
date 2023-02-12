@@ -8,7 +8,6 @@
 </head>  
 <body>  
 <nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top">  
-<a class="navbar-brand" href="#">CsvToMongo</a>
 <center><br><br><br><a href="home.html" style="color: white;">Home</a></center>  
 </nav>  
 <div class="container">  
@@ -21,17 +20,19 @@
 <th style="padding-right: 1em">Date</th>  
 <th style="padding-right: 1em">Description</th>  
 <th style="padding-right:2em;padding-left:2em;">Amount</th>  
-<th>Currency</th>  
+<th>Currency</th>
+<th>Amount (INR)</th>  
 </tr>  
 </thead>  
 <tbody style="overflow-x: scroll; height:350px;" class="table-bordered">  
 <%for(var i=0;i< expenses.length;i++){%>  
 <tr class="text-center">  
 <td ><%= i+1%></td>  
-<td style="padding-right: 1em"><%= expenses[i].Date%></td>  
+<td width=150 style="padding-right: 1em"><%= expenses[i].Date%></td>  
 <td style="padding-left: 1em;"><%= expenses[i].Description%></td>  
 <td style="padding-right:1em;padding-left:1em;"><%= expenses[i].Amount%></td>  
 <td style="padding-left: 1em"><%= expenses[i].Currency%></td>  
+<td style="padding-left: 1em"><%= expenses[i].Amount_INR%></td> 
 </tr>  
 <%}%>  
 </tbody>  

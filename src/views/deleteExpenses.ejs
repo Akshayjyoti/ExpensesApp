@@ -1,0 +1,55 @@
+<html lang="en">  
+<head>  
+<meta charset="UTF-8">  
+<meta name="viewport" content="width=device-width, initial-scale=1.0">  
+<meta http-equiv="X-UA-Compatible" content="ie=edge">  
+<title>Expenses</title>  
+<link rel="stylesheet" href="/css/bootstrap.min.css">  
+</head>  
+<body>  
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top">  
+<center><br><br><br><a href="home.html" style="color: white;">Home</a></center>  
+</nav>  
+<div class="container">  
+<%if(expenses){%>  
+<div>
+
+    <form name="insert" action="/deleteExpenses" method="post"> 
+
+        <input type="submit" value="Delete"> <br><br>
+
+<table class="table table-hover table-responsive table-stripped  nav justify-content-center" style="width: auto" >   
+<thead>  
+<tr class="bg-primary">  
+<th></th>
+<th>S.no</th>  
+<th style="padding-right: 1em">Date</th>  
+<th style="padding-right: 1em">Description</th>  
+<th style="padding-right:2em;padding-left:2em;">Amount</th>  
+<th>Currency</th>
+<th>Amount (INR)</th>  
+</tr>  
+</thead>  
+<tbody style="overflow-x: scroll; height:350px;" class="table-bordered">  
+<%for(var i=0;i< expenses.length;i++){%>  
+<tr class="text-center">
+
+<td><input type="checkbox" name="<%= expenses[i]._id %>" /></td>
+
+<td ><%= i+1%></td>  
+<td width=150 style="padding-right: 1em"><%= expenses[i].Date%></td>  
+<td style="padding-left: 1em;"><%= expenses[i].Description%></td>  
+<td style="padding-right:1em;padding-left:1em;"><%= expenses[i].Amount%></td>  
+<td style="padding-left: 1em"><%= expenses[i].Currency%></td>  
+<td style="padding-left: 1em"><%= expenses[i].Amount_INR%></td> 
+</tr>  
+<%}%>  
+</tbody>  
+</table>  
+</form>
+
+</div>  
+<%}%>  
+<br>  
+</body>  
+</html>  

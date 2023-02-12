@@ -1,0 +1,38 @@
+<html lang="en">  
+<head>  
+<meta charset="UTF-8">  
+<meta name="viewport" content="width=device-width, initial-scale=1.0">  
+<meta http-equiv="X-UA-Compatible" content="ie=edge">  
+<title>Upload csv file</title>  
+<link rel="stylesheet" href="/css/bootstrap.min.css">  
+</head>  
+<body>  
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top">  
+
+    <center><br><br><br><a href="../home.html" style="color: white;">Home</a></center>
+
+</nav>  
+<div class="container">  
+<div class=" nav justify-content-center" style="margin-top:100px;">  
+<div class="card border-warning mb-3 " style="max-width: 20rem;">  
+<div class="card-header"><h3>Insert expense</h3></div>  
+<div class="card-body">  
+<form name="insert" action="/insertExpense" method="post">  
+    Date: <input name="Date" id="Date" type="date"/><br><br>
+    Description: <textarea name="Description" id="Description" style="color: black;"/></textarea><br><br>
+    Amount: <input type="number" name="Amount" id="Amount" style="color: black;" step="0.01"/><br><br>
+    Currency: <select name="Currency" id="Currency">
+                <option value="INR">INR</option>
+                <option value="USD">USD</option>
+                <option value="SGD">SGD</option>
+                <option value="MYR">MYR</option>
+            </select><br><br>
+    <input type="submit" value="Submit">     
+</form>  
+</div>  
+</div>  
+</div><br>  
+
+<br>  
+</body>  
+</html>  

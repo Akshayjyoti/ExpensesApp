@@ -1,0 +1,67 @@
+<html lang="en">  
+<head>  
+<meta charset="UTF-8">  
+<meta name="viewport" content="width=device-width, initial-scale=1.0">  
+<meta http-equiv="X-UA-Compatible" content="ie=edge">  
+<title>Upload csv file</title>  
+<link rel="stylesheet" href="/css/bootstrap.min.css">  
+</head>  
+<body>  
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top">  
+
+    <center><br><br><br><a href="/editExpense/select" style="color: white;">Back</a></center>
+
+</nav>  
+
+<table>   
+    <style type="text/css">
+        td {
+          padding: 50px;
+        }
+      </style>
+    <thead>  
+    <tr class="bg-primary">   
+    <th style="padding-right: 1em">Date</th>  
+    <th style="padding-right: 1em">Description</th>  
+    <th style="padding-right:2em;padding-left:2em;">Amount</th>  
+    <th>Currency</th>
+    <th>Amount (INR)</th>  
+    </tr>  
+    </thead>  
+    <tbody>   
+    <tr class="text-center">  
+    <td width=150 style="padding-right: 1em"><%= expense.Date%></td>  
+    <td style="padding-left: 1em;"><%= expense.Description%></td>  
+    <td style="padding-right:1em;padding-left:1em;"><%= expense.Amount%></td>  
+    <td style="padding-left: 1em"><%= expense.Currency%></td>  
+    <td style="padding-left: 1em"><%= expense.Amount_INR%></td> 
+    </tr>  
+    </tbody>  
+    </table>
+
+
+<div class="container">  
+<div class=" nav justify-content-center" style="margin-top:10px;">  
+<div class="card border-warning mb-3 " style="max-width: 20rem;">  
+<div class="card-header"><h3>Edit expense</h3></div>  
+<div class="card-body">  
+<form name="insert" action="/editExpense/editExecute" method="post">  
+    Date: <input name="<%= expense._id %>" id="Date" type="date"/>      (Former date: <%= expense.Date %>)<br><br>
+    Description: <textarea name="<%= expense._id %>" id="Description" style="color: black;"/><%= expense.Description %></textarea><br><br>
+    Amount: <input type="number" name="<%= expense._id %>" id="Amount" style="color: black;" step="0.01" value="<%= expense.Amount %>"/>
+    (Former currency: <%= expense.Currency %>)<br><br>
+    Currency: <select name="<%= expense._id %>" id="Currency">
+                <option value="INR">INR</option>
+                <option value="USD">USD</option>
+                <option value="SGD">SGD</option>
+                <option value="MYR">MYR</option>
+            </select><br><br>
+    <input type="submit" value="Update">     
+</form>  
+</div>  
+</div>  
+</div><br>  
+
+<br>  
+</body>  
+</html>  

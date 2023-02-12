@@ -12,6 +12,9 @@ var csvSchema = new mongoose.Schema({
     },  
     Currency:{  
         type:String 
+    },
+    Amount_INR:{
+        type:Number
     }
 });  
    

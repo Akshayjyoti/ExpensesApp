@@ -2,7 +2,6 @@ import express from 'express';
 import debug from 'debug';
 import chalk from 'chalk';
 import { MongoClient, ObjectId } from 'mongodb';
-// import sessions from '../data/sessions.json' assert { type: "json" };
 
 const viewExpensesRouter = express.Router();
 const myDebug = debug('app:viewExpensesRouter');
@@ -28,7 +27,7 @@ viewExpensesRouter.route('/').get((req, res) => {
             const db = client.db(dbName);
 
             const expenses = await db.collection('expenses').find().toArray();
-            res.render('demo', { expenses });
+            res.render('csvUpload', { expenses });
 
         } catch(err) {
             myDebug(err.stack);
