@@ -4,6 +4,7 @@ import debug from 'debug';
 import morgan from 'morgan';
 import path from 'path';
 import { fileURLToPath } from 'url';
+import mongoose from 'mongoose';
 import authRouter from './src/routers/authRouter.js';
 import cookieParser from 'cookie-parser';
 import session from 'express-session';
@@ -21,6 +22,15 @@ const myDebug = debug('app');
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
+
+const url = 'mongodb://127.0.0.1:27017/expensesApp?directConnection=true&serverSelectionTimeoutMS=2000&appName=mongosh+1.6.2';
+
+mongoose.set('strictQuery', false);
+
+mongoose.connect(url,
+    {useNewUrlParser:true})  
+    .then(()=>console.log('connected to db'))  
+    .catch((err)=>console.log(err));
 
 app.use(morgan('tiny'));
 app.use(express.static(path.join(__dirname, '/public/')));

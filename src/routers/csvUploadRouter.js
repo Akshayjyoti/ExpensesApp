@@ -1,6 +1,5 @@
 import express from 'express';
 import debug from 'debug';
-import mongoose from 'mongoose';
 import multer from 'multer';
 import expenseModel from '../data/models/expenseModel.js';
 import csv from 'csvtojson';
@@ -19,15 +18,6 @@ let storage = multer.diskStorage({
     });  
 
 let uploads = multer({storage:storage});
-
-const url = 'mongodb://127.0.0.1:27017/expensesApp?directConnection=true&serverSelectionTimeoutMS=2000&appName=mongosh+1.6.2';
-
-mongoose.set('strictQuery', false);
-
-mongoose.connect(url,
-    {useNewUrlParser:true})  
-    .then(()=>console.log('connected to db'))  
-    .catch((err)=>console.log(err));
 
 csvUploadRouter.get('/',(req,res)=>{  
     expenseModel.find((err,expenses)=>{  
