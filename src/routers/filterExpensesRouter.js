@@ -2,6 +2,7 @@ import express from 'express';
 import debug from 'debug';
 import { MongoClient, ObjectId } from 'mongodb';
 import dateConversion from '../data/dateConversion.js';
+import expenseModel from '../data/models/expenseModel.js';
 
 const filterExpensesRouter = express.Router();
 const myDebug = debug('app:filterExpensesRouter');
@@ -17,59 +18,81 @@ filterExpensesRouter.use((req, res, next) => {
 filterExpensesRouter.route('/date').post((req, res) => {
     const {gtDate_Str, ltDate_Str} = req.body;
 
-    const url = 'mongodb://127.0.0.1:27017/?directConnection=true&serverSelectionTimeoutMS=2000&appName=mongosh+1.6.2';
-    const dbName = 'expensesApp';
+    const gtDate = dateConversion(gtDate_Str);
+    const ltDate = dateConversion(ltDate_Str);
 
-    (async function mongo() {
-        let client;
-        try {
-            client = await MongoClient.connect(url);
-            const db = client.db(dbName);
+    // const url = 'mongodb://127.0.0.1:27017/?directConnection=true&serverSelectionTimeoutMS=2000&appName=mongosh+1.6.2';
+    // const dbName = 'expensesApp';
 
-            const gtDate = dateConversion(gtDate_Str);
-            const ltDate = dateConversion(ltDate_Str);
+    // (async function mongo() {
+    //     let client;
+    //     try {
+    //         client = await MongoClient.connect(url);
+    //         const db = client.db(dbName);
 
-            const expenses = await db.collection('expenses').find({ Date : { $gt :  gtDate, $lt : ltDate}}).toArray();
+    //         const gtDate = dateConversion(gtDate_Str);
+    //         const ltDate = dateConversion(ltDate_Str);
 
-            console.log(expenses);
+    //         const expenses = await db.collection('expenses').find({ Date : { $gt :  gtDate, $lt : ltDate}}).toArray();
 
-            res.render('csvUpload', { expenses });
+    //         console.log(expenses);
 
-        } catch(err) {
-            myDebug(err.stack);
+    //         res.render('csvUpload', { expenses });
+
+    //     } catch(err) {
+    //         myDebug(err.stack);
+    //     }
+
+    //     client.close();
+    // }());
+
+    expenseModel.find( { Date : { $gt :  gtDate, $lt : ltDate} }, (err, expenses) => {
+        if(err) {
+            console.log(err);
+        } else {
+            res.render('filterExpenses', { expenses });
         }
-
-        client.close();
-    }());
+    });
 });
 
 filterExpensesRouter.route('/amount').post((req, res) => {
     const {gtAmount_Str, ltAmount_Str} = req.body;
 
-    const url = 'mongodb://127.0.0.1:27017/?directConnection=true&serverSelectionTimeoutMS=2000&appName=mongosh+1.6.2';
-    const dbName = 'expensesApp';
+    const gtAmount = parseFloat(gtAmount_Str);
+    const ltAmount = parseFloat(ltAmount_Str);
 
-    (async function mongo() {
-        let client;
-        try {
-            client = await MongoClient.connect(url);
-            const db = client.db(dbName);
+    // const url = 'mongodb://127.0.0.1:27017/?directConnection=true&serverSelectionTimeoutMS=2000&appName=mongosh+1.6.2';
+    // const dbName = 'expensesApp';
 
-            const gtAmount = parseFloat(gtAmount_Str);
-            const ltAmount = parseFloat(ltAmount_Str);
+    // (async function mongo() {
+    //     let client;
+    //     try {
+    //         client = await MongoClient.connect(url);
+    //         const db = client.db(dbName);
 
-            const expenses = await db.collection('expenses').find({ Amount_INR : { $gt :  gtAmount, $lt : ltAmount}}).toArray();
+    //         const gtAmount = parseFloat(gtAmount_Str);
+    //         const ltAmount = parseFloat(ltAmount_Str);
 
-            console.log(expenses);
+    //         const expenses = await db.collection('expenses').find({ Amount_INR : { $gt :  gtAmount, $lt : ltAmount}}).toArray();
 
-            res.render('csvUpload', { expenses });
+    //         console.log(expenses);
 
-        } catch(err) {
-            myDebug(err.stack);
+    //         res.render('csvUpload', { expenses });
+
+    //     } catch(err) {
+    //         myDebug(err.stack);
+    //     }
+
+    //     client.close();
+    // }());
+
+    expenseModel.find( { Amount_INR : { $gt :  gtAmount, $lt : ltAmount} }, (err, expenses) => {
+        if(err) {
+            console.log(err);
+        } else {
+            res.render('filterExpenses', { expenses });
         }
-
-        client.close();
-    }());
+    });
 });
 
 export default filterExpensesRouter;
