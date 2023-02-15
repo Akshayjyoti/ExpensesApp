@@ -3,6 +3,7 @@ import debug from 'debug';
 import chalk from 'chalk';
 import { MongoClient, ObjectId } from 'mongodb';
 import currencyConversion from '../data/currencyConversion.js';
+import dateConversion from '../data/dateConversion.js';
 
 const editExpenseRouter = express.Router();
 const myDebug = debug('app:editExpenseRouter');
@@ -69,7 +70,7 @@ editExpenseRouter.route('/editExecute').post((req, res) => {
     const newValues = Object.values(req.body)[0];
 
     const newExpenseJSON = {
-        Date: newValues[0],
+        Date: dateConversion(newValues[0]),
         Description: newValues[1],
         Amount: newValues[2],
         Currency: newValues[3],

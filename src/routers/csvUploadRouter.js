@@ -4,6 +4,7 @@ import multer from 'multer';
 import expenseModel from '../data/models/expenseModel.js';
 import csv from 'csvtojson';
 import currencyConversion from '../data/currencyConversion.js';
+import dateConversion from '../data/dateConversion.js';
 
 const csvUploadRouter = express.Router();
 const myDebug = debug('app:authRouter');
@@ -46,8 +47,8 @@ csvUploadRouter.post('/',uploads.single('csv'),(req,res)=>{
                 temp = parseFloat(jsonObj[x].Amount);  
                 jsonObj[x].Amount = temp;
                 jsonObj[x].Amount_INR = Math.round(temp * currencyConversion(jsonObj[x].Currency) * 100) / 100;
-                // temp = new Date(sonObj[x].Date);
-                // jsonObj[x].Date = temp;  
+                temp = dateConversion(jsonObj[x].Date);
+                jsonObj[x].Date = temp;  
             }
 
             console.log(jsonObj);

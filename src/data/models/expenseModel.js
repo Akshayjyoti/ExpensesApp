@@ -2,7 +2,7 @@ import mongoose from "mongoose";
    
 var csvSchema = new mongoose.Schema({  
     Date:{  
-        type:String  
+        type:Date
     },  
     Description:{  
         type:String  

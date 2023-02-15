@@ -46,10 +46,10 @@
 <div class="card-header"><h3>Edit expense</h3></div>  
 <div class="card-body">  
 <form name="insert" action="/editExpense/editExecute" method="post">  
-    Date: <input name="<%= expense._id %>" id="Date" type="date"/>      (Former date: <%= expense.Date %>)<br><br>
+    Date: <input name="<%= expense._id %>" id="Date" type="date"/> <br><br>
     Description: <textarea name="<%= expense._id %>" id="Description" style="color: black;"/><%= expense.Description %></textarea><br><br>
     Amount: <input type="number" name="<%= expense._id %>" id="Amount" style="color: black;" step="0.01" value="<%= expense.Amount %>"/>
-    (Former currency: <%= expense.Currency %>)<br><br>
+    <br><br>
     Currency: <select name="<%= expense._id %>" id="Currency">
                 <option value="INR">INR</option>
                 <option value="USD">USD</option>

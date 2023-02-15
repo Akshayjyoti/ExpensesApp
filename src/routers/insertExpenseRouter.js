@@ -2,6 +2,7 @@ import express from 'express';
 import debug from 'debug';
 import { MongoClient, ObjectId } from 'mongodb';
 import currencyConversion from '../data/currencyConversion.js';
+import dateConversion from '../data/dateConversion.js';
 
 const insertExpenseRouter = express.Router();
 const myDebug = debug('app:insertExpenseRouter');
@@ -15,7 +16,7 @@ insertExpenseRouter.use((req, res, next) => {
 });
 
 insertExpenseRouter.route('/').post((req, res) => {
-    const {Date, Description, Amount_Str, Currency} = req.body;
+    const {Date_Str, Description, Amount_Str, Currency} = req.body;
 
     const url = 'mongodb://127.0.0.1:27017/?directConnection=true&serverSelectionTimeoutMS=2000&appName=mongosh+1.6.2';
     const dbName = 'expensesApp';
@@ -26,6 +27,7 @@ insertExpenseRouter.route('/').post((req, res) => {
             client = await MongoClient.connect(url);
             const db = client.db(dbName);
 
+            let Date = dateConversion(Date_Str);
             let Amount = parseFloat(Amount_Str);
             let Amount_INR = Math.round(Amount * currencyConversion(Currency) * 100) / 100;
 
