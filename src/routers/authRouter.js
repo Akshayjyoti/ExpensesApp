@@ -1,6 +1,6 @@
 import express from 'express';
 import debug from 'debug';
-import { MongoClient, ObjectId } from 'mongodb';
+import { MongoClient } from 'mongodb';
 import passport from 'passport';
 import passportConfig from '../config/passport.js';
 import localStrategy from '../config/strategies/local.strategy.js';
