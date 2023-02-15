@@ -1,7 +1,7 @@
 import express from 'express';
 import debug from 'debug';
-import chalk from 'chalk';
-import { MongoClient, ObjectId } from 'mongodb';
+import { ObjectId } from 'mongodb';
+import expenseModel from '../data/models/expenseModel.js';
 
 const deleteExpensesRouter = express.Router();
 const myDebug = debug('app:deleteExpensesRouter');
@@ -15,54 +15,30 @@ deleteExpensesRouter.use((req, res, next) => {
 });
 
 deleteExpensesRouter.route('/').get((req, res) => {
-    const url = 'mongodb://127.0.0.1:27017/?directConnection=true&serverSelectionTimeoutMS=2000&appName=mongosh+1.6.2';
-    const dbName = 'expensesApp';
 
-    (async function mongo() {
-        let client;
-        try {
-            client = await MongoClient.connect(url);
-            myDebug(chalk.green('Connected correctly to the server'));
-
-            const db = client.db(dbName);
-
-            const expenses = await db.collection('expenses').find().toArray();
+    expenseModel.find( {}, (err, expenses) => {
+        if(err) {
+            console.log(err);
+        } else {
             res.render('deleteExpenses', { expenses });
-
-        } catch(err) {
-            myDebug(err.stack);
         }
-
-        client.close();
-    }());
+    });
 });
 
 deleteExpensesRouter.route('/').post((req, res) => {
+
     const keys = Object.keys(req.body);
-    console.log(keys);
 
-    const url = 'mongodb://127.0.0.1:27017/?directConnection=true&serverSelectionTimeoutMS=2000&appName=mongosh+1.6.2';
-    const dbName = 'expensesApp';
-
-    (async function mongo() {
-        let client;
-        try {
-            client = await MongoClient.connect(url);
-            const db = client.db(dbName);
-
-            for(let x = 0; x < keys.length; x++){
-                const results = await db.collection('expenses').deleteOne({ _id : new ObjectId(keys[x])});
-                console.log(results);
+    for(let x = 0; x < keys.length; x++){
+        expenseModel.deleteOne({ _id : new ObjectId(keys[x])}, (err, data) => {
+            if(err){
+                console.log(err);
             }
-            
-            res.redirect('/home.html');
+        });
+    }
 
-        } catch(err) {
-            myDebug(err.stack);
-        }
+    res.redirect('/deleteExpenses');
 
-        client.close();
-    }());
 });
 
 export default deleteExpensesRouter;

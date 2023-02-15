@@ -19,7 +19,6 @@ viewExpensesRouter.route('/').get((req, res) => {
         if(err) {
             console.log(err);
         } else {
-            // console.log(data);
             res.render('csvUpload', { expenses });
         }
     });
