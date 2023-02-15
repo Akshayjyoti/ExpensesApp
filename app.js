@@ -9,6 +9,7 @@ import authRouter from './src/routers/authRouter.js';
 import cookieParser from 'cookie-parser';
 import session from 'express-session';
 import passportConfig from './src/config/passport.js';
+import filterExpensesRouter from './src/routers/filterExpensesRouter.js';
 
 import csvUploadRouter from './src/routers/csvUploadRouter.js';
 import viewExpensesRouter from './src/routers/viewExpensesRouter.js';
@@ -53,6 +54,7 @@ app.use('/csvSubmit', csvUploadRouter);
 app.use('/insertExpense', insertExpenseRouter);
 app.use('/deleteExpenses', deleteExpensesRouter);
 app.use('/editExpense', editExpenseRouter);
+app.use('/filterExpenses', filterExpensesRouter);
 
 app.get('/',(req, res) => {
     res.render('index', {
